@@ -1,1 +1,38 @@
-<p>header works!</p>
+<nav class="bg-white shadow-md py-4 px-6 flex justify-between items-center">
+  <!-- Left: Logo -->
+  <div class="flex items-center space-x-2 bg-white"> 
+    <span class="font-bold text-xl">FitnessApp</span> 
+  </div>
+
+  <!-- Center: Navigation Links -->
+  <ul class="hidden md:flex space-x-6 text-gray-600 font-medium">
+    <li>
+      <a routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-blue-500" class="hover:text-blue-500 transition">Home</a>
+    </li>
+    <li>
+      <a routerLink="/shop" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-blue-500" class="hover:text-blue-500 transition">Shop</a>
+    </li>
+    <li>
+      <a routerLink="/blog" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-blue-500" class="hover:text-blue-500 transition">Blog</a>
+    </li>
+    <li>
+      <a routerLink="/contact" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-blue-500" class="hover:text-blue-500 transition">Contact</a>
+    </li>
+  </ul>
+
+  <!-- Right: Login / User Profile -->
+  <div class="hover:text-blue-500">
+    <button (click)="toggleLogin()"  class="focus:outline-none">
+      @if(isLoggedIn){
+        <div>Profile</div>  
+      }
+      @else {
+        <button class = "btn btn-primary bg-blue ">
+          Login
+        </button>
+      }
+    </button>
+  </div>
+</nav>
+
+
