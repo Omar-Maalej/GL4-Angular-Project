@@ -9,11 +9,10 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
   standalone : true
 })
 export class HeaderComponent {
-  isLoggedIn : boolean = false;
   constructor(private router : Router){}
 
-  toggleLogin(){
-    this.isLoggedIn = !this.isLoggedIn;
+  Login(){
+    this.router.navigate(['/login']);
   }
 
 }

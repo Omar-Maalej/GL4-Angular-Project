@@ -1,4 +1,4 @@
-<nav class="bg-white shadow-md py-4 px-6 flex justify-between items-center">
+<nav class="bg-white py-4 px-6 flex justify-between items-center">
   <!-- Left: Logo -->
   <div class="flex items-center space-x-2 bg-white"> 
     <span class="font-bold text-xl">FitnessApp</span> 
@@ -22,16 +22,9 @@
 
   <!-- Right: Login / User Profile -->
   <div class="hover:text-blue-500">
-    <button (click)="toggleLogin()"  class="focus:outline-none">
-      @if(isLoggedIn){
-        <div>Profile</div>  
-      }
-      @else {
-        <button class = "btn btn-primary bg-blue ">
+        <button (click)="Login()"  class = "btn btn-primary bg-blue">
           Login
         </button>
-      }
-    </button>
   </div>
 </nav>
 
