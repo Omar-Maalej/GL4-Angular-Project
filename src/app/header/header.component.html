@@ -1,38 +1,59 @@
-<nav class="bg-white shadow-md py-4 px-6 flex justify-between items-center">
+<nav
+  class="font-heading bg-white shadow-md py-4 px-6 flex justify-between items-center"
+>
   <!-- Left: Logo -->
-  <div class="flex items-center space-x-2 bg-white"> 
-    <span class="font-bold text-xl">FitnessApp</span> 
+  <div class="flex items-center space-x-2 bg-white">
+    <span class="font-bold text-xl">GO FITNESS</span>
   </div>
 
   <!-- Center: Navigation Links -->
   <ul class="hidden md:flex space-x-6 text-gray-600 font-medium">
     <li>
-      <a routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-blue-500" class="hover:text-blue-500 transition">Home</a>
+      <a
+        routerLink="/"
+        [routerLinkActiveOptions]="{ exact: true }"
+        routerLinkActive="text-blue-500"
+        class="hover:text-blue-500 transition"
+        >HOME</a
+      >
     </li>
     <li>
-      <a routerLink="/shop" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-blue-500" class="hover:text-blue-500 transition">Shop</a>
+      <a
+        routerLink="/shop"
+        [routerLinkActiveOptions]="{ exact: true }"
+        routerLinkActive="text-blue-500"
+        class="hover:text-blue-500 transition"
+        >SHOP</a
+      >
     </li>
     <li>
-      <a routerLink="/blog" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-blue-500" class="hover:text-blue-500 transition">Blog</a>
+      <a
+        routerLink="/blog"
+        [routerLinkActiveOptions]="{ exact: true }"
+        routerLinkActive="text-blue-500"
+        class="hover:text-blue-500 transition"
+        >BLOG</a
+      >
     </li>
     <li>
-      <a routerLink="/contact" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-blue-500" class="hover:text-blue-500 transition">Contact</a>
+      <a
+        routerLink="/contact"
+        [routerLinkActiveOptions]="{ exact: true }"
+        routerLinkActive="text-blue-500"
+        class="hover:text-blue-500 transition"
+        >CONTACT</a
+      >
     </li>
   </ul>
 
   <!-- Right: Login / User Profile -->
   <div class="hover:text-blue-500">
-    <button (click)="toggleLogin()"  class="focus:outline-none">
+    <button (click)="toggleLogin()" class="focus:outline-none">
       @if(isLoggedIn){
-        <div>Profile</div>  
-      }
-      @else {
-        <button class = "btn btn-primary bg-blue ">
-          Login
-        </button>
+      <div>Profile</div>
+      } @else {
+      <button class="btn btn-primary bg-blue">LOGIN</button>
       }
     </button>
   </div>
 </nav>
-
-
