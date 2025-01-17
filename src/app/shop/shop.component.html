@@ -1,2 +1,34 @@
-<div class="flex justify-between items-center"></div>
-<h1 class="text-xl font-bold mb-5">TOP TRENDING</h1>
+<div></div>
+
+
+<h1 class="text-5xl p-5 font-bold mb-5 font-heading">TOP TRENDING</h1>
+
+
+<div class="container mx-auto p-6 font-heading">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4" >
+    @for(product of fakeProducts; track product.id) {
+      <div class="bg-white rounded-lg overflow-hidden mb-2">
+        <!-- Discount Badge -->
+        @if (product.discount) {
+          <span class="absolute bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded-tr-lg">
+            -{{ product.discount }}%
+          </span>
+        }
+
+        <!-- Product Image -->
+        <div class="bg-[#F6F6F6] py-14 px-4">
+          <img src="water-bottle.png" alt="product.name" class="w-full h-64 object-cover ">
+        </div>
+
+
+        <!-- Product Details -->
+        <div class="pt-4 text-sm">
+          <h3 class="text-lg font-semibold">{{ product.name | uppercase }}</h3>
+          <div class="mt-1 flex items-center space-x-2">
+            <span class="text-sm font-bold text-slate-500">${{ product.price }}</span>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>
