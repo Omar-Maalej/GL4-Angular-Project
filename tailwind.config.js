@@ -4,8 +4,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        heading: ["Titillium Web", "sans-serif"], // For titles and headers
-        body: ["Roboto", "sans-serif"], // For paragraphs and general text
+        heading: ["Titillium Web", "sans-serif"],
+        body: ["Roboto", "sans-serif"],
       },
     },
   },
