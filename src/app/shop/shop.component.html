@@ -1,13 +1,13 @@
 <div class="flex justify-between items-center font-heading max-w-full mt-5 gap-4">
-  <div class="flex items-center bg-[#F6F6F6] h-64 px-4 rounded-lg w-full md:w-1/2">
+  <div class="flex justify-between items-center bg-[#F6F6F6] h-64 px-4 rounded-lg w-full md:w-1/2">
     <div>
       <div class="text-2xl font-semibold">BEST SELLERS</div>
       <div class="text-sm text-slate-500">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
     </div>
-    <img src="water-bottle.png" alt="product.name" class="w-32 h-auto object-contain">
+      <img src="water-bottle.png" alt="product.name" class="w-32 h-auto object-contain">
   </div>
 
-  <div class="flex items-center bg-[#F6F6F6] h-64 px-4 rounded-lg w-full md:w-1/2">
+  <div class="flex justify-between items-center bg-[#F6F6F6] h-64 px-4 rounded-lg w-full md:w-1/2">
     <div>
       <div class="text-2xl font-semibold">TOP ACCESSORIES</div>
       <div class="text-sm text-slate-500">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
@@ -37,10 +37,15 @@
           <img src="water-bottle.png" alt="product.name" class="w-40 h-auto object-contain">
         </div>
 
-        <div class="pt-4 text-sm">
+        <div class="pt-4 text-sm flex justify-between items-center">
+          <div>
           <h3 class="text-lg font-semibold truncate">{{ product.name | uppercase }}</h3>
           <div class="mt-1 flex items-center space-x-2">
             <span class="text-sm font-bold text-slate-500">${{ product.price }}</span>
+          </div>
+          </div>
+          <div class="p-2">
+          <button class="bg-blue-500 text-xs text-white px-4 py-2 m-2 rounded-lg">ADD TO CART</button>
           </div>
         </div>
       </div>
