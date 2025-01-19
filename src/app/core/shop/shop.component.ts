@@ -1,14 +1,16 @@
 import { UpperCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
+import { ProductCardComponent } from './product-card/product-card.component';
+import { Product } from '../../models/product';
 
 @Component({
   selector: 'app-shop',
-  imports: [UpperCasePipe],
+  imports: [ProductCardComponent],
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.css'
 })
 export class ShopComponent {
-  fakeProducts = [
+  fakeProducts : Product[] = [
     {
       id: 1,
       name: 'Product 1',
@@ -27,6 +29,7 @@ export class ShopComponent {
       id: 3,
       name: 'Product 3',
       price: 300,
+      discount : null,
       image: 'https://via.placeholder.com/450',
     },
     {
@@ -47,6 +50,7 @@ export class ShopComponent {
       id: 3,
       name: 'Product 3',
       price: 300,
+      discount: null,
       image: 'https://via.placeholder.com/450',
     },
     {
