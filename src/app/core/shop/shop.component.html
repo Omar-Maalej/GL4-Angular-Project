@@ -1,0 +1,32 @@
+<div class="flex justify-between items-center font-heading max-w-full mt-5 gap-4">
+  <div class="flex justify-between items-center bg-[#F6F6F6] h-64 px-4 rounded-lg w-full md:w-1/2">
+    <div>
+      <div class="text-2xl font-semibold">BEST SELLERS</div>
+      <div class="text-sm text-slate-500">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+    </div>
+      <img src="water-bottle.png" alt="product.name" class="w-32 h-auto object-contain">
+  </div>
+
+  <div class="flex justify-between items-center bg-[#F6F6F6] h-64 px-4 rounded-lg w-full md:w-1/2">
+    <div>
+      <div class="text-2xl font-semibold">TOP ACCESSORIES</div>
+      <div class="text-sm text-slate-500">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+    </div>
+    <img src="water-bottle.png" alt="product.name" class="w-32 h-auto object-contain">
+  </div>
+</div>
+
+
+<div class="flex justify-between p-5 my-12 font-heading">
+  <h1 class="text-5xl">TOP TRENDING</h1>
+  <div>FILTER TO DO</div>
+</div>
+
+
+<div class="container mx-auto p-6 font-heading">
+  <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    @for(product of fakeProducts; track product.id) {
+      <app-product-card [product] = "product"></app-product-card>
+    }
+  </div>
+</div>
