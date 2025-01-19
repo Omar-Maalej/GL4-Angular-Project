@@ -2,6 +2,7 @@ import { UpperCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { Product } from '../../models/product';
+import { ShopService } from '../../services/shop.service';
 
 @Component({
   selector: 'app-shop',
@@ -10,6 +11,10 @@ import { Product } from '../../models/product';
   styleUrl: './shop.component.css'
 })
 export class ShopComponent {
+
+  constructor(private shopService : ShopService){}
+  
+  
   fakeProducts : Product[] = [
     {
       id: 1,
