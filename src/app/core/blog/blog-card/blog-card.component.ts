@@ -17,6 +17,7 @@ export class BlogCardComponent {
     description: '',
     content: '',
     author: undefined,
+    upvotes: 0,
     comments: []
   })
 
