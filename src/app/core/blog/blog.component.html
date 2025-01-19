@@ -1,1 +1,22 @@
-<app-blog-card></app-blog-card>
+<div class="container mx-auto p-6 font-heading">
+  <!-- Search Bar -->
+  <div class="flex items-center justify-between mb-14">
+    <div class="font-heading text-3xl">BLOGS</div>
+    <div class="mb-6 w-max-full w-1/2">
+      <input 
+        type="text" 
+        [(ngModel)]="searchQuery" 
+        placeholder="Search blogs..." 
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+    </div>
+  </div>
+
+
+  <!-- Blog Grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    @for (blog of blogs; track blog.id) {
+      <app-blog-card [blog]="blog"></app-blog-card>
+    }
+  </div>
+</div>

@@ -1,9 +1,12 @@
 import { User } from "./user";
 
 export interface Blog {
+  id: number;
   title: string;
-  author: User;
-  content: string;
-  image: string;
-  comments: Comment[];
+  author?: User;
+  date: string;
+  description: string;
+  content?: string;
+  image?: string;
+  comments?: Comment[];
 }

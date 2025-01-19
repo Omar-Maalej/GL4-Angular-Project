@@ -1,0 +1,28 @@
+<div class="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+  <!-- Blog Title -->
+  <h1 class="text-3xl font-bold text-gray-800">{{ blog.title }}</h1>
+
+  <!-- Author & Date -->
+  <div class="flex items-center mt-4">
+    <img [src]="'https://api.dicebear.com/9.x/initials/svg?seed=' + blog.author?.firstname" 
+         alt="{{ blog.author?.firstname }}" 
+         class="w-10 h-10 rounded-full">
+    <div class="ml-3">
+      <p class="text-gray-700 font-semibold">{{ blog.author?.firstname }} {{ blog.author?.lastname }}</p>
+      <p class="text-gray-500 text-sm">{{ blog.date }}</p>
+    </div>
+  </div>
+
+  <!-- Main Image -->
+  <img src="meals.jpg" alt="{{ blog.title }}" class="w-full h-80 object-cover rounded-lg mt-6">
+
+  <!-- Blog Content -->
+  <div class="mt-6 text-gray-700 leading-relaxed space-y-4">
+    @for(paragraph of blog.content?.split('\n'); track paragraph){
+      <p>
+        {{ paragraph }}
+      </p>
+    }
+  </div>
+
+</div>
