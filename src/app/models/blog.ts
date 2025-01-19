@@ -8,5 +8,6 @@ export interface Blog {
   description: string;
   content?: string;
   image?: string;
+  upvotes: number;
   comments?: Comment[];
 }

@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { BlogCardComponent } from "./blog-card/blog-card.component";
 import { SlicePipe } from '@angular/common';
+import { sortPipe } from '../../pipes/order-pipe.pipe';
 import { FormsModule } from '@angular/forms';
 import { Blog } from '../../models/blog';
 
 @Component({
   selector: 'app-blog',
-  imports: [BlogCardComponent, FormsModule],
+  imports: [BlogCardComponent, FormsModule, sortPipe],
   templateUrl: './blog.component.html',
   styleUrl: './blog.component.css'
 })
@@ -27,6 +28,7 @@ export class BlogComponent {
         email: 'sarah@example.com',
         image: 'https://api.dicebear.com/9.x/initials/svg?seed=Sarah%20Johnson'
       },
+      upvotes: 5,
       comments: []
     },
     {
@@ -42,6 +44,7 @@ export class BlogComponent {
         email: 'michael@example.com',
         image: 'https://api.dicebear.com/9.x/initials/svg?seed=Michael%20Brown'
       },
+      upvotes: 10,
       comments: []
     },
     {
@@ -57,6 +60,7 @@ export class BlogComponent {
         email: 'emily@example.com',
         image: 'https://api.dicebear.com/9.x/initials/svg?seed=Emily%20Davis'
       },
+      upvotes: 0,
       comments: []
     },
     {
@@ -72,6 +76,7 @@ export class BlogComponent {
         email: 'michael@example.com',
         image: 'https://api.dicebear.com/9.x/initials/svg?seed=Michael%20Brown'
       },
+      upvotes: 7,
       comments: []
     },
     {
@@ -87,6 +92,7 @@ export class BlogComponent {
         email: 'emily@example.com',
         image: 'https://api.dicebear.com/9.x/initials/svg?seed=Emily%20Davis'
       },
+      upvotes: 7,
       comments: []
     }
   ];
