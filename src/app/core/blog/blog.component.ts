@@ -4,10 +4,11 @@ import { SlicePipe } from '@angular/common';
 import { sortPipe } from '../../pipes/order-pipe.pipe';
 import { FormsModule } from '@angular/forms';
 import { Blog } from '../../models/blog';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-blog',
-  imports: [BlogCardComponent, FormsModule, sortPipe],
+  imports: [BlogCardComponent, FormsModule, sortPipe, RouterModule],
   templateUrl: './blog.component.html',
   styleUrl: './blog.component.css'
 })
