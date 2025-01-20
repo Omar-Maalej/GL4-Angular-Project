@@ -24,6 +24,7 @@ export class BlogDetailsComponent {
     Nutrition plays a crucial role. Eat balanced meals with proteins, healthy fats, and good carbs.
     Hydration is essential; drink at least 8 glasses of water daily.`,
     image: 'https://source.unsplash.com/800x600/?fitness',
+    upvotes : 5,
   };
 
 }
