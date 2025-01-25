@@ -12,7 +12,11 @@ export class AuthService {
 
   login(email: string, password: string): Observable<any> {
     const body = { email, password };
-    return this.http.post(this.baseUrl+'login/', body);
+    return this.http.post(this.baseUrl+'login/', body, {
+      headers: {
+        'skip': 'true',
+      },
+    });
   }
 
   signup(email: string, password: string, firstName: string, lastName: string, isAdmin:boolean=false): Observable<any> {
@@ -20,7 +24,25 @@ export class AuthService {
       "last_name":lastName,
       "email":email,
       "password":password,"is_admin":isAdmin};
-    return this.http.post(this.baseUrl+'register/', body);
+    return this.http.post(this.baseUrl+'register/', body, 
+      {
+        headers: {
+          'skip': 'true',
+        },
+      }
+    );
+  }
+
+  refreshToken(): Observable<any> {
+    const body = { refresh: localStorage.getItem('refresh_token') };
+    return this.http.post(this.baseUrl+'token/refresh/', body, 
+      
+      {
+        headers: {
+          'skip': 'true',
+        },
+      }
+    );
   }
 
   logout() {
