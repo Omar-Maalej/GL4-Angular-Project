@@ -35,14 +35,7 @@ export class AuthService {
 
   refreshToken(): Observable<any> {
     const body = { refresh: localStorage.getItem('refresh_token') };
-    return this.http.post(this.baseUrl+'token/refresh/', body, 
-      
-      {
-        headers: {
-          'skip': 'true',
-        },
-      }
-    );
+    return this.http.post(this.baseUrl+'token/refresh/', body);
   }
 
   logout() {
