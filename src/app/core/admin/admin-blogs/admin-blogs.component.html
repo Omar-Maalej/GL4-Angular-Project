@@ -1,1 +1,51 @@
-<p>admin-blogs works!</p>
+<div class="container mx-auto font-heading p-6">
+  <div class="flex items-center justify-between mb-6">
+    <h2 class="text-black text-4xl">Manage Blogs</h2>
+  </div>
+
+  <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+    <table class="table-auto w-full border-collapse border border-gray-200">
+      <thead>
+        <tr class="bg-gray-100 text-gray-700 uppercase text-sm leading-normal">
+          <th class="py-3 px-6 text-left">Title</th>
+          <th class="py-3 px-6 text-left">Author</th>
+          <th class="py-3 px-6 text-left">Status</th>
+          <th class="py-3 px-6 text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="text-gray-600 text-sm font-light">
+        @for (blog of blogs; track blog) {
+        <tr class="border-b border-gray-200 hover:bg-gray-100">
+          <td
+            class="py-3 px-6 text-left hover:underline hover:text-blue-500 hover:cursor-pointer"
+          >
+            <a (click)="navigateToDetails(blog)">{{ blog.title }}</a>
+          </td>
+          <td class="py-3 px-6 text-left">
+            {{ blog.author?.firstname }} {{ blog.author?.lastname }}
+          </td>
+          <td class="py-3 px-6 text-left">
+            {{ blog.status }}
+          </td>
+          <td class="py-3 px-6 text-center text-xl">
+            @if(blog.status.toUpperCase() === 'PENDING') {
+            <button
+              class="text-blue-500 hover:text-blue-700 mr-2"
+              (click)="approveBlog(blog)"
+            >
+              <i class="fa-solid fa-square-check"></i>
+            </button>
+            }
+            <button
+              class="text-red-500 hover:text-red-700"
+              (click)="deleteBlog(blog)"
+            >
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

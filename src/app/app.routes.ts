@@ -44,6 +44,7 @@ export const routes: Routes = [
         path: 'blogs',
         component: AdminBlogsComponent,
       },
+      { path: 'blogs/:id', component: BlogDetailsComponent },
     ],
   },
   { path: '**', redirectTo: '' },
