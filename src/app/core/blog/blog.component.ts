@@ -3,10 +3,11 @@ import { BlogCardComponent } from "./blog-card/blog-card.component";
 import { SlicePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Blog } from '../../models/blog';
+import { BlogTestComponent } from "./blog-test/blog-test.component";
 
 @Component({
   selector: 'app-blog',
-  imports: [BlogCardComponent, FormsModule],
+  imports: [BlogCardComponent, FormsModule, BlogTestComponent, BlogTestComponent],
   templateUrl: './blog.component.html',
   styleUrl: './blog.component.css'
 })
