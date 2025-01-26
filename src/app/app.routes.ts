@@ -10,6 +10,7 @@ import { AdminComponent } from './core/admin/admin.component';
 import { AdminProductsComponent } from './core/admin/admin-products/admin-products.component';
 import { AdminBlogsComponent } from './core/admin/admin-blogs/admin-blogs.component';
 import { AdminDashboardComponent } from './core/admin/admin-dashboard/admin-dashboard.component';
+import { AdminProductEditComponent } from './core/admin/admin-products/admin-product-edit/admin-product-edit.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -30,6 +31,14 @@ export const routes: Routes = [
       {
         path: 'products',
         component: AdminProductsComponent,
+      },
+      {
+        path: 'products/:id/edit',
+        component: AdminProductEditComponent,
+      },
+      {
+        path: 'products/new',
+        component: AdminProductEditComponent,
       },
       {
         path: 'blogs',
