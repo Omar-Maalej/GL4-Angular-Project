@@ -28,6 +28,13 @@ export class CartComponent {
     this.cartService.updateQuantity(productId, quantity);
   }
 
+  getTotalPrice(): number {
+    return this.cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
+  }
+
   clearCart() {
     this.cartService.clearCart();
   }
