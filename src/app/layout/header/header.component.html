@@ -45,7 +45,12 @@
   </ul>
 
   <!-- Right: Login / User Profile -->
-  <div class="hover:text-blue-500">
+  <div class="flex items-center space-x-4">
+    <a  
+    routerLink="/cart"
+    [routerLinkActiveOptions]="{ exact: true }"
+    routerLinkActive="text-blue-500"
+    class="mr-2"><img class="h-6 w-6" src="shopping-cart.png" alt="cart"></a>
     <button (click)="Login()" class="btn btn-primary bg-blue">Login</button>
   </div>
 </nav>

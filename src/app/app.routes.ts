@@ -6,6 +6,7 @@ import { ShopComponent } from './core/shop/shop.component';
 import { LoginComponent } from './core/auth/login/login.component';
 import { SignupComponent } from './core/auth/signup/signup.component';
 import { BlogDetailsComponent } from './core/blog/blog-details/blog-details.component';
+import { CartComponent } from './core/cart/cart.component';
 import { AdminComponent } from './core/admin/admin.component';
 import { AdminProductsComponent } from './core/admin/admin-products/admin-products.component';
 import { AdminBlogsComponent } from './core/admin/admin-blogs/admin-blogs.component';
@@ -19,7 +20,8 @@ export const routes: Routes = [
   { path: 'blog/:id', component: BlogDetailsComponent },
   { path: 'shop', component: ShopComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
+  { path : 'signup', component: SignupComponent },
+  {path : 'cart', component : CartComponent},
   {
     path: 'admin',
     component: AdminComponent,
