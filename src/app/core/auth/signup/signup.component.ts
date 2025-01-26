@@ -31,12 +31,15 @@ export class SignupComponent {
     this.authService.signup(this.email,this.password,this.firstName,this.lastName).subscribe(
       (response: User) => {
         console.log('Registration successful:', response);
-        this.router.navigate(['/login']);
+        this.router.navigate(['']);
       
       },
       (error) => {
         console.error('Registration failed:', error);
       }
     );
+  }
+  navigateToLogin(){
+    this.router.navigate(['/login']);
   }
 }

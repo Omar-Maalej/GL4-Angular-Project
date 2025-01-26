@@ -3,9 +3,10 @@ import { AuthService } from '../../../services/auth.service';
 import { AuthResponse } from '../../../models/auth';
 import { catchError, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, } from '@angular/router';
 
 import { FormsModule } from '@angular/forms';  
+import { HeaderComponent } from '../../../layout/header/header.component';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,9 @@ export class LoginComponent {
   password: string = '';
   errorMessage: string = '';
 
-  constructor(private authService: AuthService,private router : Router) {}
+  constructor(private authService: AuthService,private router : Router,
+    private headerComponent: HeaderComponent
+  ) {}
 
   onLogin() {
     this.authService.login(this.email, this.password)
@@ -27,6 +30,9 @@ export class LoginComponent {
           console.log('Login successful:', response);
           localStorage.setItem('access_token', response.access);
           localStorage.setItem('refresh_token', response.refresh);
+          console.log('Before signal set: ', this.headerComponent.isLoggedInSignal());
+          this.headerComponent.isLoggedInSignal.set(true);
+          console.log('After signal set: ', this.headerComponent.isLoggedInSignal());
           this.router.navigate(['']);
         }),
         catchError((error) => {
@@ -36,6 +42,10 @@ export class LoginComponent {
         })
       )
       .subscribe();
+  }
+
+  navigateToSignup(){
+    this.router.navigate(['/signup']);
   }
   
 

@@ -6,6 +6,7 @@ import { ShopComponent } from './core/shop/shop.component';
 import { LoginComponent } from './core/auth/login/login.component';
 import { SignupComponent } from './core/auth/signup/signup.component';
 import { BlogDetailsComponent } from './core/blog/blog-details/blog-details.component';
+import { ProfileComponent } from './core/profile/profile.component';
 
 export const routes: Routes = [
   {path : '', component : HomeComponent},
@@ -14,6 +15,7 @@ export const routes: Routes = [
   {path : 'blog/:id', component: BlogDetailsComponent}, 
   {path : 'shop', component : ShopComponent}, 
   {path : 'login', component : LoginComponent},
-  {path: 'signup',component: SignupComponent},
+  {path: 'signup',component: SignupComponent,},
+  {path :'profile',component: ProfileComponent},
   {path : '**',  redirectTo : ''}
 ];
