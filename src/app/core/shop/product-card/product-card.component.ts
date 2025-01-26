@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Product } from '../../../models/product';
 import { UpperCasePipe } from '@angular/common';
 
@@ -16,4 +16,10 @@ export class ProductCardComponent {
     discount : null,
     image : ""
   });
+
+  addToCart = output<Product>();
+
+  onAddToCart() {
+    this.addToCart.emit(this.product());
+  }
 }

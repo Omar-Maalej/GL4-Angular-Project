@@ -3,6 +3,9 @@ import { Component } from '@angular/core';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { Product } from '../../models/product';
 import { ShopService } from '../../services/shop.service';
+import { CartService } from '../../services/cart.service';
+import { CartItem } from '../../models/cartItem';
+import { CartComponent } from "../cart/cart.component";
 
 @Component({
   selector: 'app-shop',
@@ -12,7 +15,23 @@ import { ShopService } from '../../services/shop.service';
 })
 export class ShopComponent {
 
-  constructor(private shopService : ShopService){}
+  constructor(
+    private shopService : ShopService,
+    private cartService : CartService
+  ){}
+
+  addToCart(product: Product) {
+    const cartItem : CartItem = {
+      prodId: product.id,
+      name: product.name,
+      price: product.price,
+      quantity: 1
+    }
+    this.cartService.addToCart(cartItem);
+
+    //toast message
+
+  }
   
   
   fakeProducts : Product[] = [
