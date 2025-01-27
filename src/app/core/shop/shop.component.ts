@@ -41,6 +41,7 @@ export class ShopComponent {
       price: 100,
       image: 'assets/sport-man.jpg',
       discount: 10,
+      description: 'This is a description of product 1'
     },
     {
       id: 2,
@@ -48,6 +49,9 @@ export class ShopComponent {
       price: 200,
       image: 'https://via.placeholder.com/450',
       discount: 20,
+      description: 'This is a description of product 2'
+
+
     },
     {
       id: 3,
@@ -55,6 +59,8 @@ export class ShopComponent {
       price: 300,
       discount : null,
       image: 'https://via.placeholder.com/450',
+      description: 'This is a description of product 3'
+
     },
     {
       id: 4,
@@ -62,6 +68,8 @@ export class ShopComponent {
       price: 400,
       image: 'https://via.placeholder.com/450',
       discount: 40,
+      description: 'This is a description of product 4'
+
     },
     {
       id: 5,
@@ -69,6 +77,8 @@ export class ShopComponent {
       price: 200,
       image: 'https://via.placeholder.com/450',
       discount: 20,
+      description: 'This is a description of product 5'
+
     },
     {
       id: 6,
@@ -76,6 +86,8 @@ export class ShopComponent {
       price: 300,
       discount: null,
       image: 'https://via.placeholder.com/450',
+      description: 'This is a description of product 7'
+
     },
     {
       id: 7,
@@ -83,6 +95,8 @@ export class ShopComponent {
       price: 400,
       image: 'https://via.placeholder.com/450',
       discount: 40,
+      description: 'This is a description of product 7'
+
     }
   ]
 

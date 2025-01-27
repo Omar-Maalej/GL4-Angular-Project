@@ -16,6 +16,8 @@ export class AdminProductsComponent {
       price: 100,
       discount: 10,
       image: 'https://via.placeholder.com/150',
+      description: 'This is a description of product 1'
+
     },
     {
       id: 2,
@@ -23,6 +25,8 @@ export class AdminProductsComponent {
       price: 200,
       discount: 15,
       image: 'https://via.placeholder.com/150',
+      description: 'This is a description of product 2'
+
     },
     {
       id: 3,
@@ -30,6 +34,8 @@ export class AdminProductsComponent {
       price: 300,
       discount: null,
       image: 'https://via.placeholder.com/150',
+      description: 'This is a description of product 3'
+
     },
     {
       id: 4,
@@ -37,6 +43,8 @@ export class AdminProductsComponent {
       price: 150,
       discount: 5,
       image: 'https://via.placeholder.com/150',
+      description: 'This is a description of product 4'
+
     },
   ];
 
