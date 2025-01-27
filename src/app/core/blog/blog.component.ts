@@ -1,15 +1,20 @@
 import { Component } from '@angular/core';
 import { BlogCardComponent } from "./blog-card/blog-card.component";
-import { SlicePipe } from '@angular/common';
+import { CommonModule, SlicePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Blog } from '../../models/blog';
 import { BlogTestComponent } from "./blog-test/blog-test.component";
 import { BlogService } from '../../services/blog.service';
 import { Post } from '../../models/post.model';
+import { Router } from '@angular/router';
+import { AuthState } from '../../store/auth/auth.state';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { selectIsLoggedIn } from '../../store/auth/auth.selectors';
 
 @Component({
   selector: 'app-blog',
-  imports: [BlogCardComponent, FormsModule, BlogTestComponent, BlogTestComponent],
+  imports: [BlogCardComponent, FormsModule,CommonModule ,BlogTestComponent, BlogTestComponent],
   templateUrl: './blog.component.html',
   styleUrl: './blog.component.css'
 })
@@ -17,12 +22,25 @@ export class BlogComponent {
   searchQuery: string = '';
 
   posts: Post[] = [];
+  isLoggedIn$: Observable<AuthState['isLoggedIn']>;
 
-  constructor(private blogService: BlogService) {}
+  constructor(private blogService: BlogService,
+    private router: Router,
+    private store: Store<{ auth: AuthState }>
+  ) {
+    this.isLoggedIn$ = this.store.select(selectIsLoggedIn);
+    
+  }
 
   ngOnInit(): void {
     this.fetchPosts();
   }
+
+  addBlog() {
+    this.router.navigate(['/blog/add']);
+  }
+
+
 
 
   fetchPosts(): void {

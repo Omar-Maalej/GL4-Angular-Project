@@ -2,6 +2,8 @@ import { Component, signal } from '@angular/core';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BlogDetailsComponent } from '../blog-details/blog-details.component';
+import { BlogService } from '../../../services/blog.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-blog',
@@ -25,6 +27,11 @@ export class BlogAddComponent {
   maxImages = 5;
   previewMode = signal(false);
 
+  constructor(
+    private blogService: BlogService,
+    private toastr : ToastrService
+  ) {}
+
   addForm = new FormGroup({
     title: new FormControl<string | null>('', [
       Validators.required,
@@ -37,6 +44,29 @@ export class BlogAddComponent {
   onSubmit() {
     console.log('Blog submitted:', this.blog());
     // Handle form submission logic
+    const formData = new FormData();
+    formData.append('title', this.blog().title);
+    formData.append('content', this.blog().content);
+    //iterate over the images and append them to the form data
+    this.uploadedImages.forEach((image) => {
+      formData.append('images', image);
+    });
+    this.blogService.createPost(formData).subscribe(
+      (data) => {
+        console.log(data);
+        this.toastr.success('Blog post added successfully');
+        //reset the form
+        this.uploadedImages = [];
+        this.addForm.reset();
+        //remove the images from the uploaded images array
+        //reset the blog object
+        // this.router.navigate(['/blog']);
+      },
+      (error) => {
+        this.toastr.error('Error adding blog post');
+        console.log(error);
+      }
+    );
   }
 
   onPreview() {
