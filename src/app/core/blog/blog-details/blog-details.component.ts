@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Blog } from '../../../models/blog';
 import { BlogService } from '../../../services/blog.service';
 import { ActivatedRoute } from '@angular/router';
@@ -17,6 +17,7 @@ export class BlogDetailsComponent {
 
   id!: string;
   blog!: PostDetails;
+
   
   constructor(private route: ActivatedRoute, private blogService: BlogService) {}
 
