@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, catchError, switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { loginSuccess, loginFailure } from './auth.actions';
+import { loginSuccess, loginFailure, logout } from './auth.actions';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
@@ -41,6 +41,16 @@ export class AuthEffects {
         ofType(loginFailure),
         tap(({ error }) => {
             console.error('Login failed:', error);
+        })
+        ),
+        { dispatch: false }
+    );
+
+    logout$ = createEffect(() =>
+        () => this.actions$.pipe(
+        ofType(logout),
+        tap(() => {
+            this.router.navigate(['/']);
         })
         ),
         { dispatch: false }

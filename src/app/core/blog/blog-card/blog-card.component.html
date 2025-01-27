@@ -8,10 +8,12 @@
     <p class="text-gray-600 mt-2 mb-2">{{ truncateContent(blog().content, 140) }}</p>
 
 
-    <!-- <div class="flex items-center">
-      <img [src]="blog().author?.image" alt="{{ blog().author?.firstname }}" class="w-8 h-8 rounded-full">
-      <span class="ml-2 text-sm text-gray-700 font-medium">{{ blog().author?.firstname }} {{ blog().author?.lastname }}</span>
-    </div>   -->
+    <div class="flex items-center">
+       <div class="w-8 h-8 rounded-full bg-gray-500 flex items-center justify-center">
+        <span class="text-white text-md font-semibold">{{ blog().user.first_name.charAt(0) }}{{ blog().user.last_name.charAt(0) }}</span>
+       </div>
+      <span class="ml-2 text-sm text-gray-700 font-medium">{{ blog().user.first_name }} {{ blog().user.last_name }}</span>
+    </div>  
 
     <a routerLink="{{ blogLink(blog().id) }}" class="text-blue-500 font-bold mt-3 block hover:underline">Read More →</a>
   </div>

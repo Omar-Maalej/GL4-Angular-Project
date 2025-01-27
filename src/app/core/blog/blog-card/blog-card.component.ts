@@ -42,6 +42,12 @@ export class BlogCardComponent {
     updated_at: '',
     comments_count: 0,
     likes_count: 0,
-    images: []
+    images: [],
+    user: {
+      id: 0,
+      first_name: '',
+      last_name: '',
+      email: ''
+    }
   })
 }

@@ -4,17 +4,20 @@ import { BlogService } from '../../../services/blog.service';
 import { ActivatedRoute } from '@angular/router';
 import { Post } from '../../../models/post.model';
 import { CommonModule } from '@angular/common';
+import { PostDetails } from '../../../models/post-details.model';
+import { BlogCommentsComponent } from '../blog-comments/blog-comments.component';
 
 @Component({
   selector: 'app-blog-details',
-  imports: [CommonModule],
+  imports: [CommonModule, BlogCommentsComponent],
   templateUrl: './blog-details.component.html',
   styleUrl: './blog-details.component.css'
 })
 export class BlogDetailsComponent {
 
   id!: string;
-  @Input() blog!: Post;
+  blog!: PostDetails;
+
   
   constructor(private route: ActivatedRoute, private blogService: BlogService) {}
 
