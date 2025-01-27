@@ -1,6 +1,8 @@
+import { SampleUser } from "./sample-user.model";
+
 export interface Like {
     id: number;
-    user: string;
+    user: SampleUser;
     post: number;
   }
   

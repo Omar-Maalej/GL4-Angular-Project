@@ -1,5 +1,6 @@
 import { Comment } from "./comment.model";
 import { Like } from "./like.model";
+import { SampleUser } from "./sample-user.model";
 
 export interface PostDetails {
     id: number;
@@ -10,11 +11,6 @@ export interface PostDetails {
     comments: Comment[];
     likes: Like[];
     images: Array<{ id: number, image: string }>;
-    user : {
-      id: number;
-      first_name: string;
-      last_name: string;
-      email: string;
-    }
+    user : SampleUser;
   }
   
