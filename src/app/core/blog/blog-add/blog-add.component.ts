@@ -2,6 +2,7 @@ import { Component, signal } from '@angular/core';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BlogDetailsComponent } from '../blog-details/blog-details.component';
+import { BlogService } from '../../../services/blog.service';
 
 @Component({
   selector: 'app-add-blog',
@@ -10,6 +11,8 @@ import { BlogDetailsComponent } from '../blog-details/blog-details.component';
   imports: [CommonModule, ReactiveFormsModule, BlogDetailsComponent],
 })
 export class BlogAddComponent {
+  constructor(private blogService: BlogService) {}
+
   blog = signal({
     id: 0,
     title: '',
@@ -33,10 +36,23 @@ export class BlogAddComponent {
     content: new FormControl<string | null>('', [Validators.required]),
     images: new FormControl<File[] | null>([]),
   });
+  
 
   onSubmit() {
-    console.log('Blog submitted:', this.blog());
-    // Handle form submission logic
+    const formData = new FormData();
+    formData.append('title', this.addForm.get('title')?.value || '');
+    formData.append('content', this.addForm.get('content')?.value || '');
+
+    const images = this.addForm.get('images')?.value;
+    if (images && Array.isArray(images)) {
+      images.forEach((image, index) => {
+        formData.append(`images[${index}]`, image, image.name);
+      });
+    }
+
+    console.log('FormData:', formData);
+
+    this.blogService.createPost(formData);
   }
 
   onPreview() {
