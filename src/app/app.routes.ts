@@ -14,11 +14,14 @@ import { AdminDashboardComponent } from './core/admin/admin-dashboard/admin-dash
 import { AdminProductEditComponent } from './core/admin/admin-products/admin-product-edit/admin-product-edit.component';
 import { AuthGuard } from './guards/auth/auth.guard';
 import { AdminGuard } from './guards/admin/admin.guard';
+import { BlogAddComponent } from './core/blog/blog-add/blog-add.component';
+
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'blog', component: BlogComponent },
+  { path : 'blog/add', component : BlogAddComponent},
   { path: 'blog/:id', component: BlogDetailsComponent },
   { path: 'shop', component: ShopComponent, canActivate: [AuthGuard],
   },
