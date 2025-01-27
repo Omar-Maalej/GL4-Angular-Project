@@ -7,8 +7,11 @@
     <!-- <img [src]="'https://api.dicebear.com/9.x/initials/svg?seed=' + blog.author?.firstname" 
          alt="{{ blog.author?.firstname }}" 
          class="w-10 h-10 rounded-full"> -->
+         <div class="w-8 h-8 rounded-full bg-gray-500 flex items-center justify-center">
+          <span class="text-white text-md font-semibold">{{ blog.user.first_name.charAt(0) }}{{ blog.user.last_name.charAt(0) }}</span>
+         </div>
     <div class="ml-3">
-      <!-- <p class="text-gray-700 font-semibold">{{ blog.author?.firstname }} {{ blog.author?.lastname }}</p> -->
+      <p class="text-gray-700 font-semibold">{{ blog.user.first_name }} {{ blog.user.last_name }}</p>
       <p class="text-gray-500 text-sm">{{ formatDate( blog.created_at) }}</p>
     </div>
   </div>

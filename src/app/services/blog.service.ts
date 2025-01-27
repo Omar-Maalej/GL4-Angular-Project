@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Post } from '../models/post.model';
 import { Comment } from '../models/comment.model';
 import { Like } from '../models/like.model';
+import { PostDetails } from '../models/post-details.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,8 +34,8 @@ export class BlogService {
   }
 
   // Get a specific post by ID
-  getPost(id: number): Observable<Post> {
-    return this.http.get<Post>(`${this.baseUrl}posts/${id}/`);
+  getPost(id: number): Observable<PostDetails> {
+    return this.http.get<PostDetails>(`${this.baseUrl}posts/${id}/`);
   }
 
   // Update a post

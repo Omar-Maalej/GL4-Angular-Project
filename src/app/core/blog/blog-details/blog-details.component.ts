@@ -4,6 +4,7 @@ import { BlogService } from '../../../services/blog.service';
 import { ActivatedRoute } from '@angular/router';
 import { Post } from '../../../models/post.model';
 import { CommonModule } from '@angular/common';
+import { PostDetails } from '../../../models/post-details.model';
 
 @Component({
   selector: 'app-blog-details',
@@ -14,7 +15,7 @@ import { CommonModule } from '@angular/common';
 export class BlogDetailsComponent {
 
   id!: string;
-  blog!: Post;
+  blog!: PostDetails;
   
   constructor(private route: ActivatedRoute, private blogService: BlogService) {}
 

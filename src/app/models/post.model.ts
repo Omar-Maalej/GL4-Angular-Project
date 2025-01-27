@@ -7,4 +7,10 @@ export interface Post {
   comments_count: number;
   likes_count: number;
   images: Array<{ id: number, image: string }>;
+  user : {
+    id: number;
+    first_name: string;
+    last_name: string;
+    email: string;
+  }
 }
