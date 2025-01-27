@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from  '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Post } from '../models/post.model';
 import { Comment } from '../models/comment.model';
@@ -16,7 +16,14 @@ export class BlogService {
 
   // Get list of all posts
   getPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this.baseUrl}posts/`);
+    return this.http.get<Post[]>(`${this.baseUrl}posts/`, 
+
+    {
+      headers: {
+        'skip': 'true',
+      },
+    }
+    );
   }
 
   // Create a new post
