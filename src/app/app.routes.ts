@@ -12,19 +12,23 @@ import { AdminProductsComponent } from './core/admin/admin-products/admin-produc
 import { AdminBlogsComponent } from './core/admin/admin-blogs/admin-blogs.component';
 import { AdminDashboardComponent } from './core/admin/admin-dashboard/admin-dashboard.component';
 import { AdminProductEditComponent } from './core/admin/admin-products/admin-product-edit/admin-product-edit.component';
+import { AuthGuard } from './guards/auth/auth.guard';
+import { AdminGuard } from './guards/admin/admin.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'blog', component: BlogComponent },
   { path: 'blog/:id', component: BlogDetailsComponent },
-  { path: 'shop', component: ShopComponent },
+  { path: 'shop', component: ShopComponent, canActivate: [AuthGuard],
+  },
   { path: 'login', component: LoginComponent },
   { path : 'signup', component: SignupComponent },
   {path : 'cart', component : CartComponent},
   {
     path: 'admin',
     component: AdminComponent,
+    canActivate: [AdminGuard],
     children: [
       {
         path: '',
