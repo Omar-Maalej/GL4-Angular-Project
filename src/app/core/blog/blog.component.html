@@ -9,14 +9,18 @@
         placeholder="Search blogs..." 
         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
+     <div *ngIf="(isLoggedIn$ | async) === true"
+      class="w-full flex justify-end"
+     >
       <button
-        class="mt-4 px-6 py-3 bg-gradient-to-r text-black font-semibold uppercase tracking-wider shadow-lg border-2 border-black
-        hover:border-purple-600 hover:shadow-black/50 transition-all duration-300 font-heading"
-        routerLink="'/blog/add'"
-        style="width: 40%;" 
-      >
-        Add Blog
-      </button>
+      class="mt-4 px-6 py-3 bg-gradient-to-r text-black font-semibold uppercase tracking-wider shadow-lg border-2 border-black
+      hover:border-purple-600 hover:shadow-black/50 transition-all duration-300 font-heading"
+      (click)="addBlog()"
+      style="width: 40%;" 
+    >
+      Add Blog
+    </button>
+     </div>
     </div>
   </div>
 
