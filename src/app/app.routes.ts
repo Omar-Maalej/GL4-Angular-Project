@@ -21,7 +21,7 @@ export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'blog', component: BlogComponent },
-  { path : 'blog/add', component : BlogAddComponent},
+  { path : 'blog/add', component : BlogAddComponent , canActivate: [AuthGuard]},
   { path: 'blog/:id', component: BlogDetailsComponent },
   { path: 'shop', component: ShopComponent, canActivate: [AuthGuard],
   },
