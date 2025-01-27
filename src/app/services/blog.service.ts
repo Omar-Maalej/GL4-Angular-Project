@@ -17,6 +17,7 @@ export class BlogService {
 
   // Get list of all posts
   getPosts(): Observable<Post[]> {
+    console.log("here blog service");
     return this.http.get<Post[]>(`${this.baseUrl}posts/`, 
 
     {

@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
   selector: 'app-add-blog',
   templateUrl: './blog-add.component.html',
   styleUrls: ['./blog-add.component.css'],
-  imports: [CommonModule, ReactiveFormsModule, BlogDetailsComponent],
+  imports: [CommonModule, ReactiveFormsModule],
 })
 export class BlogAddComponent {
   blog = signal({
