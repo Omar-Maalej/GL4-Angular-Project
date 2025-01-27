@@ -3,7 +3,7 @@
     <h2 class="text-2xl font-bold mb-6 text-center">Log In</h2>
     <form (ngSubmit)="onLogin()"> 
 
-      <div *ngIf="isErrored$ | async as error" class="bg-red-100 rouned-md p-3 mb-4">
+      <div *ngIf="(isErrored$ | async) === true" class="bg-red-100 rouned-md p-3 mb-4">
         <p class="text-red-500">Invalid email or password</p>
       </div>
       <div class="mb-4">
