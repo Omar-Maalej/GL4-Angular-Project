@@ -6,6 +6,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AdminProductState } from '../../../../store/admin/product/product.state';
+import {
+  createProduct,
+  updateProduct,
+} from '../../../../store/admin/product/product.actions';
 
 export interface Product {
   name: string;
@@ -25,15 +31,18 @@ export class AdminProductEditComponent implements OnInit {
   addOperation!: boolean;
   productForm!: FormGroup;
   currentImage!: string;
+  productId!: number;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private store: Store<{ adminProduct: AdminProductState }>
   ) {}
 
   ngOnInit(): void {
     this.addOperation = this.route.snapshot.params['id'] === undefined;
+    this.productId = this.route.snapshot.params['id'];
 
     this.productForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
@@ -62,30 +71,48 @@ export class AdminProductEditComponent implements OnInit {
 
   onFileChange(event: any): void {
     const file = event.target.files[0];
-    this.productForm.addControl('file', file);
+    this.productForm.patchValue({ file });
   }
 
   onSubmit(): void {
     if (this.productForm.valid) {
-      const product = {
-        ...this.productForm.getRawValue(),
-      };
+      const formData = this.prepareFormData();
 
       if (this.addOperation) {
-        this.addProduct(product);
+        this.addProduct(formData);
       } else {
-        this.updateProduct(product);
+        this.updateProduct(formData);
       }
     }
   }
 
-  addProduct(product: Product): void {
-    console.log('Product added:', product);
+  prepareFormData(): FormData {
+    const formData = new FormData();
+    const formValues = this.productForm.value;
+
+    formData.append('name', formValues.name);
+    formData.append('price', formValues.price.toString());
+    if (formValues.discount !== null) {
+      formData.append('discount', formValues.discount.toString());
+    }
+    if (formValues.file) {
+      formData.append('file', formValues.file);
+    }
+
+    return formData;
+  }
+
+  addProduct(formData: FormData): void {
+    console.log('FormData for adding product:', formData);
+    this.store.dispatch(createProduct({ productData: formData }));
     this.navigateBack();
   }
 
-  updateProduct(product: Product): void {
-    console.log('Product updated:', product);
+  updateProduct(formData: FormData): void {
+    console.log('FormData for updating product:', formData);
+    this.store.dispatch(
+      updateProduct({ id: this.productId, productData: formData })
+    );
     this.navigateBack();
   }
 

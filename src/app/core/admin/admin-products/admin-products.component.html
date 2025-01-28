@@ -19,10 +19,10 @@
         </tr>
       </thead>
       <tbody class="text-gray-600 text-sm font-light">
-        @for (product of products; track product) {
+        @for(product of products$ | async;track product ){
         <tr class="border-b border-gray-200 hover:bg-gray-100">
           <td class="py-3 px-6 text-left">{{ product.name }}</td>
-          <td class="py-3 px-6 text-left">{{ product.price }}</td>
+          <td class="py-3 px-6 text-left">{{ product.price | currency }}</td>
           <td class="py-3 px-6 text-center">
             <button
               class="text-blue-500 hover:text-blue-700 mr-2"
@@ -32,7 +32,7 @@
             </button>
             <button
               class="text-red-500 hover:text-red-700"
-              (click)="deleteProduct(product)"
+              (click)="deleteProduct(product.id)"
             >
               <i class="fas fa-trash-alt"></i>
             </button>
