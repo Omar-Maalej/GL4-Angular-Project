@@ -38,26 +38,26 @@
     </div>
 
     <div class="mb-4">
-      <label class="block text-sm font-medium text-gray-700" for="discount"
-        >Discount</label
+      <label class="block text-sm font-medium text-gray-700" for="description"
+        >Description</label
       >
-      <input
-        id="discount"
-        type="number"
+      <textarea
+        id="description"
+        rows="4"
         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
-        formControlName="discount"
-      />
+        formControlName="description"
+      ></textarea>
     </div>
 
     <div class="mb-4">
-      <label class="block text-sm font-medium text-gray-700" for="image"
-        >Image URL</label
+      <label class="block text-sm font-medium text-gray-700" for="file"
+        >Image</label
       >
       <input
         id="file"
         type="file"
         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
-        formControlName="file"
+        (change)="onFileChange($event)"
       />
     </div>
 

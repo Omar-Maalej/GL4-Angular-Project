@@ -16,8 +16,8 @@ import {
 export interface Product {
   name: string;
   price: number;
-  discount: number | null;
   image: string;
+  description: string;
 }
 
 @Component({
@@ -30,7 +30,6 @@ export interface Product {
 export class AdminProductEditComponent implements OnInit {
   addOperation!: boolean;
   productForm!: FormGroup;
-  currentImage!: string;
   productId!: number;
 
   constructor(
@@ -47,7 +46,7 @@ export class AdminProductEditComponent implements OnInit {
     this.productForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       price: [0, [Validators.required, Validators.min(0)]],
-      discount: [null, [Validators.min(0), Validators.max(100)]],
+      description: ['', [Validators.required, Validators.minLength(10)]],
       file: [null, this.addOperation ? Validators.required : []],
     });
 
@@ -61,17 +60,22 @@ export class AdminProductEditComponent implements OnInit {
     const mockProduct: Product = {
       name: 'Sample Product',
       price: 99.99,
-      discount: 10,
       image: 'sample-product.jpg',
+      description: 'This is a sample description for the product.',
     };
 
-    this.productForm.patchValue(mockProduct);
-    this.currentImage = mockProduct.image;
+    this.productForm.patchValue({
+      name: mockProduct.name,
+      price: mockProduct.price,
+      description: mockProduct.description,
+    });
   }
 
   onFileChange(event: any): void {
     const file = event.target.files[0];
-    this.productForm.patchValue({ file });
+    if (file) {
+      this.productForm.get('file')?.setValue(file);
+    }
   }
 
   onSubmit(): void {
@@ -92,24 +96,21 @@ export class AdminProductEditComponent implements OnInit {
 
     formData.append('name', formValues.name);
     formData.append('price', formValues.price.toString());
-    if (formValues.discount !== null) {
-      formData.append('discount', formValues.discount.toString());
-    }
+    formData.append('description', formValues.description);
     if (formValues.file) {
-      formData.append('file', formValues.file);
+      formData.append('image', formValues.file);
     }
 
     return formData;
   }
 
   addProduct(formData: FormData): void {
-    console.log('FormData for adding product:', formData);
     this.store.dispatch(createProduct({ productData: formData }));
     this.navigateBack();
+    console.log('jaw behi lenna 1');
   }
 
   updateProduct(formData: FormData): void {
-    console.log('FormData for updating product:', formData);
     this.store.dispatch(
       updateProduct({ id: this.productId, productData: formData })
     );
