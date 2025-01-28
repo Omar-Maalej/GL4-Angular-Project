@@ -1,4 +1,8 @@
-<div class="bg-white rounded-lg overflow-hidden mb-2 relative">
+<div class="bg-white rounded-lg overflow-hidden mb-2 relative cursor-pointer"
+  (click)="navigateToProductDetails()"
+
+
+>
   @if (product().discount) {
     <span class="absolute top-2 left-2 bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded-lg">
       -{{ product().discount }}%
