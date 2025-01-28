@@ -5,7 +5,10 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AdminProductState } from '../../../store/admin/product/product.state';
 import { selectAdminProducts } from '../../../store/admin/product/product.selectors';
-import { loadProducts } from '../../../store/admin/product/product.actions';
+import {
+  deleteProduct,
+  loadProducts,
+} from '../../../store/admin/product/product.actions';
 import { AsyncPipe, CurrencyPipe } from '@angular/common';
 
 @Component({
@@ -20,7 +23,6 @@ export class AdminProductsComponent {
 
   constructor(
     private router: Router,
-
     private store: Store<{ adminProduct: AdminProductState }>
   ) {
     this.products$ = this.store.select(selectAdminProducts);
@@ -32,6 +34,7 @@ export class AdminProductsComponent {
   ngOnInit(): void {
     console.log('here admin');
     this.store.dispatch(loadProducts());
+    console.log(this.products$);
   }
 
   addNewProduct() {
@@ -43,6 +46,6 @@ export class AdminProductsComponent {
   }
 
   deleteProduct(product: any) {
-    console.log('Delete Product:', product);
+    this.store.dispatch(deleteProduct({ id: product.id }));
   }
 }

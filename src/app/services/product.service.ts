@@ -11,9 +11,7 @@ export class ProductService {
 
   constructor(private http: HttpClient) {}
 
-  // Get list of all posts
   getProducts(): Observable<Product[]> {
-    console.log('here product service');
     return this.http.get<Product[]>(`${this.baseUrl}`, {
       headers: {
         skip: 'true',
@@ -40,6 +38,9 @@ export class ProductService {
   }
 
   deleteProduct(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}${id}/delete/`);
+    const headers = new HttpHeaders();
+    return this.http.delete<any>(`${this.baseUrl}${id}/delete/`, {
+      headers,
+    });
   }
 }

@@ -1,10 +1,10 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { AdminProductState } from './product.state';
 
-export const selectAdminBlogState =
-  createFeatureSelector<AdminProductState>('adminBlog');
+export const selectAdminProductState =
+  createFeatureSelector<AdminProductState>('adminProduct');
 
 export const selectAdminProducts = createSelector(
-  selectAdminBlogState,
+  selectAdminProductState,
   (state) => state.products
 );

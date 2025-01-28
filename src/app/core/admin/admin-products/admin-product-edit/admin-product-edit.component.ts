@@ -12,6 +12,7 @@ import {
   createProduct,
   updateProduct,
 } from '../../../../store/admin/product/product.actions';
+import { ProductService } from '../../../../services/product.service';
 
 export interface Product {
   name: string;
@@ -31,12 +32,14 @@ export class AdminProductEditComponent implements OnInit {
   addOperation!: boolean;
   productForm!: FormGroup;
   productId!: number;
+  currentImagePath: string | null = null;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private store: Store<{ adminProduct: AdminProductState }>
+    private store: Store<{ adminProduct: AdminProductState }>,
+    private productService: ProductService
   ) {}
 
   ngOnInit(): void {
@@ -57,17 +60,13 @@ export class AdminProductEditComponent implements OnInit {
   }
 
   loadProduct(productId: number): void {
-    const mockProduct: Product = {
-      name: 'Sample Product',
-      price: 99.99,
-      image: 'sample-product.jpg',
-      description: 'This is a sample description for the product.',
-    };
-
-    this.productForm.patchValue({
-      name: mockProduct.name,
-      price: mockProduct.price,
-      description: mockProduct.description,
+    this.productService.getProduct(productId).subscribe((product) => {
+      this.currentImagePath = product.image;
+      this.productForm.patchValue({
+        name: product.name,
+        price: product.price,
+        description: product.description,
+      });
     });
   }
 
