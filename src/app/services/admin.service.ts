@@ -24,4 +24,8 @@ export class AdminService {
       status,
     });
   }
+
+  getStats(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}count/`);
+  }
 }
