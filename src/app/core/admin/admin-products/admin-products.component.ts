@@ -1,54 +1,41 @@
 import { Component } from '@angular/core';
 import { Product } from '../../../models/product';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AdminProductState } from '../../../store/admin/product/product.state';
+import { selectAdminProducts } from '../../../store/admin/product/product.selectors';
+import {
+  deleteProduct,
+  loadProducts,
+} from '../../../store/admin/product/product.actions';
+import { AsyncPipe, CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-admin-products',
   templateUrl: './admin-products.component.html',
   styleUrl: './admin-products.component.css',
+  imports: [CurrencyPipe, AsyncPipe],
   standalone: true,
 })
 export class AdminProductsComponent {
-  products: Product[] = [
-    {
-      id: 1,
-      name: 'Product A',
-      price: 100,
-      discount: 10,
-      image: 'https://via.placeholder.com/150',
-      description: 'This is a description of product 1'
+  products$: Observable<Product[]>;
 
-    },
-    {
-      id: 2,
-      name: 'Product B',
-      price: 200,
-      discount: 15,
-      image: 'https://via.placeholder.com/150',
-      description: 'This is a description of product 2'
+  constructor(
+    private router: Router,
+    private store: Store<{ adminProduct: AdminProductState }>
+  ) {
+    this.products$ = this.store.select(selectAdminProducts);
+    this.products$.subscribe((products) => {
+      console.log(products);
+    });
+  }
 
-    },
-    {
-      id: 3,
-      name: 'Product C',
-      price: 300,
-      discount: null,
-      image: 'https://via.placeholder.com/150',
-      description: 'This is a description of product 3'
-
-    },
-    {
-      id: 4,
-      name: 'Product D',
-      price: 150,
-      discount: 5,
-      image: 'https://via.placeholder.com/150',
-      description: 'This is a description of product 4'
-
-    },
-  ];
-
-  constructor(private router: Router) {}
+  ngOnInit(): void {
+    console.log('here admin');
+    this.store.dispatch(loadProducts());
+    console.log(this.products$);
+  }
 
   addNewProduct() {
     this.router.navigate(['admin', 'products', 'new']);
@@ -59,6 +46,6 @@ export class AdminProductsComponent {
   }
 
   deleteProduct(product: any) {
-    console.log('Delete Product:', product);
+    this.store.dispatch(deleteProduct({ id: product.id }));
   }
 }

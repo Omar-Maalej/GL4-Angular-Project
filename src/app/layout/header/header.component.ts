@@ -12,35 +12,33 @@ import { logout } from '../../store/auth/auth.actions';
   imports: [RouterLink, RouterLinkActive, CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
-  standalone : true
+  standalone: true,
 })
 export class HeaderComponent {
-
   isLoggedIn$: Observable<AuthState['isLoggedIn']>;
   userFullName$: Observable<AuthState['user']>;
 
   isOpen = false;
 
-  constructor(private router : Router
-    , private store: Store<{ auth: AuthState }>
-  ){
+  constructor(
+    private router: Router,
+    private store: Store<{ auth: AuthState }>
+  ) {
     this.isLoggedIn$ = this.store.select(selectIsLoggedIn);
     this.userFullName$ = this.store.select(user);
   }
 
-  toggleDropdown(){
+  toggleDropdown() {
     console.log('toggleDropdown');
     this.isOpen = !this.isOpen;
   }
 
-  onLogout(){
+  onLogout() {
     console.log('onLogout');
     this.store.dispatch(logout());
   }
 
-
-  Login(){
+  Login() {
     this.router.navigate(['/login']);
   }
-
 }

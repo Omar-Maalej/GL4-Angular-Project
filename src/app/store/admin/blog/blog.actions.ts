@@ -2,7 +2,6 @@ import { createAction, props } from '@ngrx/store';
 import { Post } from '../../../models/post.model';
 import { PostDetails } from '../../../models/post-details.model';
 
-
 export const loadPosts = createAction('[Admin Blog] Load Posts');
 export const loadPostsSuccess = createAction(
   '[Admin Blog] Load Posts Success',
@@ -22,7 +21,7 @@ export const getPostDetails = createAction(
 export const getPostDetailsSuccess = createAction(
   '[Admin Blog] Get Post Details Success',
   props<{ post: PostDetails }>()
-);  
+);
 
 export const getPostDetailsFailure = createAction(
   '[Admin Blog] Get Post Details Failure',
@@ -31,9 +30,8 @@ export const getPostDetailsFailure = createAction(
 
 export const changePostStatus = createAction(
   '[Admin Blog] Change Post Status',
-  props<{ id: number, status: string }>()
+  props<{ id: number; status: string }>()
 );
-
 
 export const changePostStatusSuccess = createAction(
   '[Admin Blog] Change Post Status Success',
@@ -42,5 +40,20 @@ export const changePostStatusSuccess = createAction(
 
 export const changePostStatusFailure = createAction(
   '[Admin Blog] Change Post Status Failure',
+  props<{ error: any }>()
+);
+
+export const deletePost = createAction(
+  '[Admin Blog] Delete Post',
+  props<{ id: number }>()
+);
+
+export const deletePostSuccess = createAction(
+  '[Admin Blog] Delete Post Success',
+  props<{ id: number }>()
+);
+
+export const deletePostFailure = createAction(
+  '[Admin Blog] Delete Post Failure',
   props<{ error: any }>()
 );

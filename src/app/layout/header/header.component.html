@@ -18,7 +18,6 @@
     <li>
       <a
         routerLink="/shop"
-        [routerLinkActiveOptions]="{ exact: true }"
         routerLinkActive="text-blue-500"
         class="hover:text-blue-500 transition"
         >SHOP</a
@@ -27,72 +26,96 @@
     <li>
       <a
         routerLink="/blog"
-        [routerLinkActiveOptions]="{ exact: true }"
         routerLinkActive="text-blue-500"
         class="hover:text-blue-500 transition"
         >BLOG</a
       >
     </li>
-    <li>  
+    <li>
       <a
         routerLink="/contact"
-        [routerLinkActiveOptions]="{ exact: true }"
         routerLinkActive="text-blue-500"
         class="hover:text-blue-500 transition"
         >CONTACT</a
       >
     </li>
+    @if((this.userFullName$ | async )?.role === "admin") {
+    <li>
+      <a
+        routerLink="/admin"
+        routerLinkActive="text-blue-500"
+        class="hover:text-blue-500 transition"
+        >ADMIN</a
+      >
+    </li>
+    }
   </ul>
 
   <!-- Right: Login / User Profile -->
   <div class="flex items-center space-x-4">
-    <a  
-    routerLink="/cart"
-    [routerLinkActiveOptions]="{ exact: true }"
-    routerLinkActive="text-blue-500"
-    class="mr-2"><img class="h-6 w-6" src="shopping-cart.png" alt="cart"></a>
+    <a
+      routerLink="/cart"
+      [routerLinkActiveOptions]="{ exact: true }"
+      routerLinkActive="text-blue-500"
+      class="mr-2"
+      ><img class="h-6 w-6" src="shopping-cart.png" alt="cart"
+    /></a>
     <button
       *ngIf="(isLoggedIn$ | async) === false"
-    (click)="Login()" class="btn btn-primary bg-blue">Login</button>
+      (click)="Login()"
+      class="btn btn-primary bg-blue"
+    >
+      Login
+    </button>
 
-    <div *ngIf="(isLoggedIn$ | async) === true" class="flex items-center space-x-4">
+    <div
+      *ngIf="(isLoggedIn$ | async) === true"
+      class="flex items-center space-x-4"
+    >
       <!-- <a routerLink="/profile" class="text-gray-600 font-medium">Profile</a> -->
       <div class="text-gray-600 font-medium mx-2">|</div>
       <div class="flex items-center">
-        <div class="w-8 h-8 rounded-full bg-gray-500 flex items-center justify-center">
-          <span class="text-white text-md font-semibold">{{ (userFullName$ | async)?.first_name?.charAt(0) }}{{ (userFullName$ | async)?.last_name?.charAt(0) }}</span>
+        <div
+          class="w-8 h-8 rounded-full bg-gray-500 flex items-center justify-center"
+        >
+          <span class="text-white text-md font-semibold"
+            >{{ (userFullName$ | async)?.first_name?.charAt(0)
+            }}{{ (userFullName$ | async)?.last_name?.charAt(0) }}</span
+          >
         </div>
-        <span class="ml-2 text-sm text-gray-700 font-medium">{{ (userFullName$ | async)?.first_name }} {{ (userFullName$ | async)?.last_name }}</span>
+        <span class="ml-2 text-sm text-gray-700 font-medium"
+          >{{ (userFullName$ | async)?.first_name }}
+          {{ (userFullName$ | async)?.last_name }}</span
+        >
       </div>
       <div class="relative inline-block text-left">
-      <i class="material-icons hover:cursor-pointer"
-      (click)="toggleDropdown()"
-      >arrow_drop_down</i>
+        <i
+          class="material-icons hover:cursor-pointer"
+          (click)="toggleDropdown()"
+          >arrow_drop_down</i
+        >
 
-
-      <div *ngIf="isOpen" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1">
-        <!-- <a
+        <div
+          *ngIf="isOpen"
+          class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1"
+        >
+          <!-- <a
           routerLink="/profile"
           class="block px-4 py-2 text-gray-800 hover:bg-blue-500 hover:text-white"
           >Profile</a
         > -->
-    
-        <a
-          (click)="onLogout()"
-          class="block px-4 flex items-center space-x-2 py-2 text-gray-800 hover:bg-blue-500 hover:text-white cursor-pointer"
-          >
-          <i class="material-icons text-base">logout</i>
-          <span>Logout</span></a
-        >
-      </div>
 
+          <a
+            (click)="onLogout()"
+            class="block px-4 flex items-center space-x-2 py-2 text-gray-800 hover:bg-blue-500 hover:text-white cursor-pointer"
+          >
+            <i class="material-icons text-base">logout</i>
+            <span>Logout</span></a
+          >
+        </div>
       </div>
-      
 
       <!-- <button (click)="Logout()" class="btn btn-primary bg-red">Logout</button> -->
     </div>
-
   </div>
-
-
 </nav>
