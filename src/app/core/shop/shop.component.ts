@@ -1,11 +1,12 @@
 import { UpperCasePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { Product } from '../../models/product';
 import { ShopService } from '../../services/shop.service';
 import { CartService } from '../../services/cart.service';
 import { CartItem } from '../../models/cartItem';
 import { CartComponent } from "../cart/cart.component";
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-shop',
@@ -13,12 +14,24 @@ import { CartComponent } from "../cart/cart.component";
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.css'
 })
-export class ShopComponent {
+export class ShopComponent implements OnInit {
+  products: Product[] = [];
 
   constructor(
     private shopService : ShopService,
-    private cartService : CartService
+    private cartService : CartService,
+    private productServcie: ProductService
   ){}
+  ngOnInit(): void {
+      this.loadproducts();
+  }
+
+  loadproducts (){
+    this.productServcie.getProducts().subscribe(products => {
+      this.products = products;
+    })
+  }
+
 
   addToCart(product: Product) {
     const cartItem : CartItem = {
@@ -34,57 +47,7 @@ export class ShopComponent {
   }
   
   
-  fakeProducts : Product[] = [
-    {
-      id: 1,
-      name: 'Product 1',
-      price: 100,
-      image: 'assets/sport-man.jpg',
-      discount: 10,
-    },
-    {
-      id: 2,
-      name: 'Product 2',
-      price: 200,
-      image: 'https://via.placeholder.com/450',
-      discount: 20,
-    },
-    {
-      id: 3,
-      name: 'Product 3',
-      price: 300,
-      discount : null,
-      image: 'https://via.placeholder.com/450',
-    },
-    {
-      id: 4,
-      name: 'Product 4',
-      price: 400,
-      image: 'https://via.placeholder.com/450',
-      discount: 40,
-    },
-    {
-      id: 5,
-      name: 'Product 5',
-      price: 200,
-      image: 'https://via.placeholder.com/450',
-      discount: 20,
-    },
-    {
-      id: 6,
-      name: 'Product 6',
-      price: 300,
-      discount: null,
-      image: 'https://via.placeholder.com/450',
-    },
-    {
-      id: 7,
-      name: 'Product 7',
-      price: 400,
-      image: 'https://via.placeholder.com/450',
-      discount: 40,
-    }
-  ]
+  
 
 
 

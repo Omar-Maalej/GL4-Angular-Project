@@ -14,37 +14,41 @@
         </tr>
       </thead>
       <tbody class="text-gray-600 text-sm font-light">
-        @for (blog of blogs; track blog) {
-        <tr class="border-b border-gray-200 hover:bg-gray-100">
-          <td
-            class="py-3 px-6 text-left hover:underline hover:text-blue-500 hover:cursor-pointer"
+        <ng-container *ngIf="posts$ | async as posts">
+          <tr
+            *ngFor="let blog of posts; trackBy: trackByPostId"
+            class="border-b border-gray-200 hover:bg-gray-100"
           >
-            <a (click)="navigateToDetails(blog)">{{ blog.title }}</a>
-          </td>
-          <td class="py-3 px-6 text-left">
-            {{ blog.author?.firstname }} {{ blog.author?.lastname }}
-          </td>
-          <td class="py-3 px-6 text-left">
-            {{ blog.status }}
-          </td>
-          <td class="py-3 px-6 text-center text-xl">
-            @if(blog.status.toUpperCase() === 'PENDING') {
-            <button
-              class="text-blue-500 hover:text-blue-700 mr-2"
-              (click)="approveBlog(blog)"
+            <td
+              class="py-3 px-6 text-left hover:underline hover:text-blue-500 hover:cursor-pointer"
             >
-              <i class="fa-solid fa-square-check"></i>
-            </button>
-            }
-            <button
-              class="text-red-500 hover:text-red-700"
-              (click)="deleteBlog(blog)"
-            >
-              <i class="fas fa-trash-alt"></i>
-            </button>
-          </td>
-        </tr>
-        }
+              <!-- <a (click)="navigateToDetails(blog)">{{ blog.title }}</a> -->
+              {{ blog.title }}
+            </td>
+            <td class="py-3 px-6 text-left">
+              {{ blog.user.first_name }} {{ blog.user.last_name }}
+            </td>
+            <td class="py-3 px-6 text-left">
+              {{ blog?.status }}
+            </td>
+            <td class="py-3 px-6 text-center text-xl">
+              <button
+                *ngIf="blog?.status?.toUpperCase() === 'PENDING'"
+                class="text-blue-500 hover:text-blue-700 mr-2 cursor-pointer"
+                (click)="approveBlog(blog)"
+              >
+                <i class="fa-solid fa-square-check"></i>
+              </button>
+
+              <button
+                class="text-red-500 hover:text-red-700 cursor-pointer"
+                (click)="deleteBlog(blog)"
+              >
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </td>
+          </tr>
+        </ng-container>
       </tbody>
     </table>
   </div>

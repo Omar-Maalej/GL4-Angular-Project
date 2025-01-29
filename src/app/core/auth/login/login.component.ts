@@ -37,25 +37,7 @@ export class LoginComponent {
   }
 
   onLogin() {
-    // this.authService.login(this.email, this.password)  
-    //   .pipe(
-    //     tap((response: AuthResponse) => {
-    //       console.log('Login successful:', response);
-    //       localStorage.setItem('access_token', response.access);
-    //       localStorage.setItem('refresh_token', response.refresh);
-    //       this.router.navigate(['']);
-    //     }),
-    //     catchError((error) => {
-    //       console.error('Login failed:', error);
-    //       this.errorMessage = 'Invalid credentials';
-    //       return of(null); 
-    //     })
-    //   )
-    //   .subscribe();
-
     this.store.dispatch(login({ email: this.email, password: this.password }))
-    
-    
   }
   
 
