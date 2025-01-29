@@ -158,8 +158,48 @@
               </div>
             </div>
       
-            <!-- <div class="w-1/2">
-              <app-blog-details [blog]="blog()"></app-blog-details>
+            <div class="w-1/2">
+                <div class="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg my-4">
+                    <!-- Blog Title -->
+                    <h1 class="text-3xl font-bold text-gray-800">{{ addForm.value.title }}</h1>
+                  
+                    <!-- Author & Date -->
+                    <div class="flex items-center mt-4">
+                      <!-- <img [src]="'https://api.dicebear.com/9.x/initials/svg?seed=' + blog.author?.firstname" 
+                           alt="{{ blog.author?.firstname }}" 
+                           class="w-10 h-10 rounded-full"> -->
+                           <div class="w-8 h-8 rounded-full bg-gray-500 flex items-center justify-center">
+                            <span class="text-white text-md font-semibold">{{ (userFullName$ | async)?.first_name?.charAt(0) }}{{ (userFullName$ | async)?.last_name?.charAt(0) }}</span>
+                           </div>
+                      <div class="ml-3">
+                        <p class="text-gray-700 font-semibold">{{ (userFullName$ | async)?.first_name }} {{ (userFullName$ | async)?.last_name }}</p>
+                      </div>
+                    </div>
+                  
+                    <!-- Main Image -->
+                     @if(uploadedImages.length > 0){
+                    <img src="{{ uploadedImages[0] }}" alt="{{ addForm.value.title }}" class="w-full h-80 object-cover rounded-lg mt-6">
+                     }
+                    <!-- Blog Content -->
+                    <div class="mt-6 text-gray-700 leading-relaxed space-y-4">
+                      <!-- @for(paragraph of blog.content?.split('\n'); track paragraph){
+                        <p>
+                          {{ paragraph }}
+                        </p>
+                      } -->
+                        <p>
+                          {{ addForm.value.content }}
+                        </p>
+                    </div>
+                  
+                    <div *ngIf="uploadedImages.length > 1" class="grid grid-cols-2 gap-4 mt-6">
+                      <div *ngFor="let image of uploadedImages.slice(1)">
+                        <img src="{{ image }}" alt="{{ addForm.value.title }}" class="w-full h-80 object-cover rounded-lg">
+                      </div>
+                    </div>
+                  
+                  </div>
+                  
               <div class="flex justify-center mt-4">
                 <button
                   class="px-6 py-3 bg-gradient-to-r text-black font-semibold uppercase tracking-wider shadow-lg border-2 border-black hover:border-purple-600 hover:shadow-white/50 transition-all duration-300 font-heading cursor-pointer"
@@ -168,7 +208,7 @@
                   Exit Preview
                 </button>
               </div>
-            </div> -->
+            </div>
           </div>
         </form>
       </div>

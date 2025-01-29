@@ -4,6 +4,10 @@ import { CommonModule } from '@angular/common';
 import { BlogDetailsComponent } from '../blog-details/blog-details.component';
 import { BlogService } from '../../../services/blog.service';
 import { ToastrService } from 'ngx-toastr';
+import { Store } from '@ngrx/store';
+import { AuthState } from '../../../store/auth/auth.state';
+import { user } from '../../../store/auth/auth.selectors';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add-blog',
@@ -12,6 +16,8 @@ import { ToastrService } from 'ngx-toastr';
   imports: [CommonModule, ReactiveFormsModule, BlogDetailsComponent],
 })
 export class BlogAddComponent {
+  
+
   blog = signal({
     id: 0,
     title: '',
@@ -26,11 +32,15 @@ export class BlogAddComponent {
   uploadedImages: File[] = [];
   maxImages = 5;
   previewMode = signal(false);
+  userFullName$: Observable<AuthState['user']>;
 
   constructor(
     private blogService: BlogService,
-    private toastr : ToastrService
-  ) {}
+    private toastr : ToastrService,
+    private store: Store<{ auth: AuthState }>
+  ) {
+    this.userFullName$ = this.store.select(user);
+  }
 
   addForm = new FormGroup({
     title: new FormControl<string | null>('', [
