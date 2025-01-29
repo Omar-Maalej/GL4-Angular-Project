@@ -6,7 +6,11 @@ import { AdminBlogState } from '../../../store/admin/blog/blog.state';
 import { Observable } from 'rxjs';
 import { Post } from '../../../models/post.model';
 import { selectAdminPosts } from '../../../store/admin/blog/blog.selectors';
-import { changePostStatus, loadPosts } from '../../../store/admin/blog/blog.actions';
+import {
+  changePostStatus,
+  deletePost,
+  loadPosts,
+} from '../../../store/admin/blog/blog.actions';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -16,11 +20,10 @@ import { CommonModule } from '@angular/common';
   styleUrl: './admin-blogs.component.css',
 })
 export class AdminBlogsComponent {
-
   posts$: Observable<Post[]>;
-  
 
-  constructor(private router: Router, 
+  constructor(
+    private router: Router,
     private store: Store<{ adminBlog: AdminBlogState }>
   ) {
     this.posts$ = this.store.select(selectAdminPosts);
@@ -30,7 +33,7 @@ export class AdminBlogsComponent {
   }
 
   ngOnInit(): void {
-    console.log("here admin");
+    console.log('here admin');
     this.store.dispatch(loadPosts());
   }
 
@@ -38,13 +41,11 @@ export class AdminBlogsComponent {
     this.store.dispatch(changePostStatus({ id, status }));
   }
 
-
-
   navigateToDetails(blog: Blog) {
     this.router.navigate(['admin', 'blogs', blog.id]);
   }
-  deleteBlog(_t13: Blog) {
-    throw new Error('Method not implemented.');
+  deleteBlog(blog: Post) {
+    this.store.dispatch(deletePost({ id: blog.id }));
   }
   approveBlog(blog: Post) {
     this.changePostStatus(blog.id, 'approved');

@@ -6,12 +6,19 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AdminProductState } from '../../../../store/admin/product/product.state';
+import {
+  createProduct,
+  updateProduct,
+} from '../../../../store/admin/product/product.actions';
+import { ProductService } from '../../../../services/product.service';
 
 export interface Product {
   name: string;
   price: number;
-  discount: number | null;
   image: string;
+  description: string;
 }
 
 @Component({
@@ -24,21 +31,25 @@ export interface Product {
 export class AdminProductEditComponent implements OnInit {
   addOperation!: boolean;
   productForm!: FormGroup;
-  currentImage!: string;
+  productId!: number;
+  currentImagePath: string | null = null;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private store: Store<{ adminProduct: AdminProductState }>,
+    private productService: ProductService
   ) {}
 
   ngOnInit(): void {
     this.addOperation = this.route.snapshot.params['id'] === undefined;
+    this.productId = this.route.snapshot.params['id'];
 
     this.productForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       price: [0, [Validators.required, Validators.min(0)]],
-      discount: [null, [Validators.min(0), Validators.max(100)]],
+      description: ['', [Validators.required, Validators.minLength(10)]],
       file: [null, this.addOperation ? Validators.required : []],
     });
 
@@ -49,43 +60,59 @@ export class AdminProductEditComponent implements OnInit {
   }
 
   loadProduct(productId: number): void {
-    const mockProduct: Product = {
-      name: 'Sample Product',
-      price: 99.99,
-      discount: 10,
-      image: 'sample-product.jpg',
-    };
-
-    this.productForm.patchValue(mockProduct);
-    this.currentImage = mockProduct.image;
+    this.productService.getProduct(productId).subscribe((product) => {
+      this.currentImagePath = product.image;
+      this.productForm.patchValue({
+        name: product.name,
+        price: product.price,
+        description: product.description,
+      });
+    });
   }
 
   onFileChange(event: any): void {
     const file = event.target.files[0];
-    this.productForm.addControl('file', file);
+    if (file) {
+      this.productForm.get('file')?.setValue(file);
+    }
   }
 
   onSubmit(): void {
     if (this.productForm.valid) {
-      const product = {
-        ...this.productForm.getRawValue(),
-      };
+      const formData = this.prepareFormData();
 
       if (this.addOperation) {
-        this.addProduct(product);
+        this.addProduct(formData);
       } else {
-        this.updateProduct(product);
+        this.updateProduct(formData);
       }
     }
   }
 
-  addProduct(product: Product): void {
-    console.log('Product added:', product);
-    this.navigateBack();
+  prepareFormData(): FormData {
+    const formData = new FormData();
+    const formValues = this.productForm.value;
+
+    formData.append('name', formValues.name);
+    formData.append('price', formValues.price.toString());
+    formData.append('description', formValues.description);
+    if (formValues.file) {
+      formData.append('image', formValues.file);
+    }
+
+    return formData;
   }
 
-  updateProduct(product: Product): void {
-    console.log('Product updated:', product);
+  addProduct(formData: FormData): void {
+    this.store.dispatch(createProduct({ productData: formData }));
+    this.navigateBack();
+    console.log('jaw behi lenna 1');
+  }
+
+  updateProduct(formData: FormData): void {
+    this.store.dispatch(
+      updateProduct({ id: this.productId, productData: formData })
+    );
     this.navigateBack();
   }
 
