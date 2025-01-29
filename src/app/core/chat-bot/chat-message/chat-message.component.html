@@ -1,0 +1,31 @@
+<div class="flex w-full mb-4" [class.justify-end]="!isBot">
+    <div class="max-w-[85%] lg:max-w-2xl">
+      <div 
+        class="p-4 rounded-lg shadow-sm"
+        [class.ml-2]="isBot"
+        [class.mr-2]="!isBot"
+        [class.bg-gray-100]="isBot"
+        [class.bg-blue-600]="!isBot"
+        [class.text-gray-800]="isBot"
+        [class.text-white]="!isBot"
+      >
+        <!-- Message Header -->
+        <div class="flex justify-between items-center mb-2 text-sm">
+          <span class="font-semibold">
+            {{ isBot ? 'AI Assistant' : message.user.first_name }}
+          </span>
+          <span class="opacity-75">
+            {{ message.created_at | date:'shortTime' }}
+          </span>
+        </div>
+  
+        <!-- Message Content -->
+        <div class="break-words">
+          <div *ngIf="!isBot" class="user-message">
+            {{ message.message }}
+          </div>
+          <div *ngIf="isBot" class="bot-response" [innerHTML]="message.response | markdown"></div>
+        </div>
+      </div>
+    </div>
+  </div>

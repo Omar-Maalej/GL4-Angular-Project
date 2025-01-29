@@ -18,6 +18,7 @@ import { BlogAddComponent } from './core/blog/blog-add/blog-add.component';
 import { ProductDetailsComponent } from './core/shop/product-details/product-details.component';
 import { PaymentSuccessComponent } from './core/payment-success/payment-success.component';
 import { OrdersComponent } from './core/orders/orders.component';
+import { ChatBotComponent } from './core/chat-bot/chat-bot.component';
 
 
 export const routes: Routes = [
@@ -33,6 +34,7 @@ export const routes: Routes = [
   {path: 'product/:id', component: ProductDetailsComponent},
   {path: 'payment-success', component: PaymentSuccessComponent},
   { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] },
+  { path: 'chatbot', component: ChatBotComponent, canActivate: [AuthGuard] },
   {
     path: 'admin',
     component: AdminComponent,
