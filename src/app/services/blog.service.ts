@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Post } from '../models/post.model';
 import { Comment } from '../models/comment.model';
@@ -13,6 +13,21 @@ export class BlogService {
   private baseUrl = 'http://127.0.0.1:8000/api/blog/';
 
   constructor(private http: HttpClient) {}
+
+
+  getPaginatedPosts(page: number, pageSize: number, searchQuery: string = ''): Observable<any> {
+    let params = new HttpParams()
+      .set('page', page.toString())
+      .set('page_size', pageSize.toString());
+
+    if (searchQuery) {
+      params = params.set('search', searchQuery);
+    }
+
+    return this.http.get<any>(`${this.baseUrl}paginated-search/`, { params,  headers: {
+      skip: 'true',
+    },});
+  }
 
   // Get list of all posts
   getPosts(): Observable<Post[]> {
