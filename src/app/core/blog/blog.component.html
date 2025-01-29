@@ -8,6 +8,7 @@
           [(ngModel)]="searchQuery" 
           placeholder="Search blogs..." 
           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          (input) = "searchBlogs()"
         />
       <div *ngIf="(isLoggedIn$ | async) === true"
         class="w-full flex justify-end"
@@ -38,4 +39,16 @@
     <div class="text-center text-gray-500">Unfortunately, there is no blog 😔</div>
     <div class="text-center text-gray-500">Add one yourself if you want 💪</div>
   </ng-template>
+
+  <div class="flex justify-center mt-8">
+    <button
+      *ngFor="let page of getPages()"
+      (click)="onPageChange(page)"
+      class="mx-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      [class.bg-blue-500]="currentPage === page"
+      [class.text-white]="currentPage === page"
+    >
+      {{ page }}
+    </button>
+  </div>
   </div>

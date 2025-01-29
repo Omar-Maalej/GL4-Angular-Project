@@ -8,14 +8,13 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
-  imports:[FormsModule]
+  imports:[FormsModule, RouterLink]
 })
 export class SignupComponent {
   firstName: string = '';
   lastName: string = '';
   email: string = '';
   password: string = '';
-  isAdmin: boolean = false;
 
   constructor(private authService: AuthService,private router:Router) {}
 
@@ -25,7 +24,6 @@ export class SignupComponent {
       lastName: this.lastName,
       email: this.email,
       password: this.password,
-      isAdmin: this.isAdmin
     };
 
     this.authService.signup(this.email,this.password,this.firstName,this.lastName).subscribe(
