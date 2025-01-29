@@ -25,4 +25,8 @@ export class OrderService {
   getUserOrders(): Observable<any> {
     return this.http.get(`${this.apiUrl}user-orders/`);
   }
+
+  checkoutSpeceficOrder(orderId: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}checkout-specific-order/`, { order_id: orderId });
+  }
 }
