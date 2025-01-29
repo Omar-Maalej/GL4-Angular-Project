@@ -16,9 +16,12 @@ export class PaymentSuccessComponent implements OnInit {
   ngOnInit(): void {
     this.sessionId = this.route.snapshot.queryParamMap.get('session_id');
 
+    console.log('session id', this.sessionId);
+
     if (this.sessionId) {
       this.orderService.confirmPayment(this.sessionId).subscribe({
         next: () => {
+          localStorage.removeItem('cart');
           this.successMessage = 'Payment Successful! Thank you for your order.';
         },
         error: () => {
