@@ -107,6 +107,8 @@ export class BlogAddComponent {
       }));
       this.addForm.patchValue({ images: this.uploadedImages });
     }
+    console.log(this.uploadedImages);
+    
   }
   
 
