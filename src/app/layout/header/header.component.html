@@ -29,14 +29,6 @@
         >BLOG</a
       >
     </li>
-    <li>
-      <a
-        routerLink="/contact"
-        routerLinkActive="text-blue-500"
-        class="hover:text-blue-500 transition"
-        >CONTACT</a
-      >
-    </li>
     @if((this.userFullName$ | async )?.role === "admin") {
     <li>
       <a
