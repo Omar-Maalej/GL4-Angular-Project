@@ -29,14 +29,6 @@
         >BLOG</a
       >
     </li>
-    <li>
-      <a
-        routerLink="/contact"
-        routerLinkActive="text-blue-500"
-        class="hover:text-blue-500 transition"
-        >CONTACT</a
-      >
-    </li>
     @if((this.userFullName$ | async )?.role === "admin") {
     <li>
       <a
@@ -95,7 +87,20 @@
           *ngIf="isOpen"
           class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1"
         >
-         
+        <a
+        class="block px-4 flex items-center space-x-2 py-2 text-gray-800 hover:bg-blue-500 hover:text-white cursor-pointer"
+        routerLink="/orders"
+        >
+        <i class="material-icons text-base">shopping_cart</i>
+        <span>Orders</span></a
+      >
+
+      <a class="block px-4 flex items-center space-x-2 py-2 text-gray-800 hover:bg-blue-500 hover:text-white cursor-pointer"
+        routerLink="/chatbot"
+      >
+        <i class="material-icons text-base">smart_toy</i>
+        <span>Fitness AI Assistant</span></a
+      >
 
           <a
             (click)="onLogout()"
@@ -104,6 +109,7 @@
             <i class="material-icons text-base">logout</i>
             <span>Logout</span></a
           >
+          
         </div>
       </div>
 

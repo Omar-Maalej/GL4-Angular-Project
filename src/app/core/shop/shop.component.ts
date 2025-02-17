@@ -5,50 +5,51 @@ import { Product } from '../../models/product';
 import { ShopService } from '../../services/shop.service';
 import { CartService } from '../../services/cart.service';
 import { CartItem } from '../../models/cartItem';
-import { CartComponent } from "../cart/cart.component";
+import { CartComponent } from '../cart/cart.component';
 import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-shop',
   imports: [ProductCardComponent],
   templateUrl: './shop.component.html',
-  styleUrl: './shop.component.css'
+  styleUrl: './shop.component.css',
 })
 export class ShopComponent implements OnInit {
   products: Product[] = [];
 
   constructor(
-    private shopService : ShopService,
-    private cartService : CartService,
+    private shopService: ShopService,
+    private cartService: CartService,
     private productServcie: ProductService
-  ){}
+  ) {}
   ngOnInit(): void {
-      this.loadproducts();
+    this.loadproducts();
   }
 
-  loadproducts (){
-    this.productServcie.getProducts().subscribe(products => {
+  loadproducts() {
+    this.productServcie.getProducts().subscribe((products) => {
       this.products = products;
-    })
+    });
   }
-
 
   addToCart(product: Product) {
-    const cartItem : CartItem = {
-      prodId: product.id,
-      name: product.name,
-      price: product.price,
-      quantity: 1
+    const currentItems = this.cartService.getCartItems();
+    const existingItem = currentItems.find(
+      (item) => item.prodId === product.id
+    );
+
+    if (existingItem) {
+      this.cartService.updateQuantity(product.id, existingItem.quantity + 1);
+    } else {
+      const cartItem: CartItem = {
+        prodId: product.id,
+        name: product.name,
+        price: product.price,
+        quantity: 1,
+      };
+      this.cartService.addToCart(cartItem);
     }
-    this.cartService.addToCart(cartItem);
 
-    //toast message
-
+    // Show toast message
   }
-  
-  
-  
-
-
-
 }

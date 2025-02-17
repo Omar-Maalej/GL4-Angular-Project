@@ -36,6 +36,7 @@ export class AdminDashboardComponent implements OnInit {
         },
       },
     },
+
     scales: {
       x: {
         title: {

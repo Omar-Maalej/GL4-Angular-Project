@@ -1,5 +1,10 @@
 import { Component, signal } from '@angular/core';
-import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BlogDetailsComponent } from '../blog-details/blog-details.component';
 import { BlogService } from '../../../services/blog.service';
@@ -24,9 +29,9 @@ export class BlogAddComponent {
     content: '',
     images: [] as { id: number; image: string }[],
     created_at: new Date().toISOString(),
-    updated_at: '', 
-    comments_count: 0, 
-    likes_count: 0, 
+    updated_at: '',
+    comments_count: 0,
+    likes_count: 0,
     //default values for the blog object so that we can call the details component safely
   });
   uploadedImages: File[] = [];
@@ -53,7 +58,6 @@ export class BlogAddComponent {
 
   onSubmit() {
     console.log('Blog submitted:', this.blog());
-    // Handle form submission logic
     const formData = new FormData();
     formData.append('title', this.blog().title);
     formData.append('content', this.blog().content);
@@ -82,24 +86,23 @@ export class BlogAddComponent {
   onPreview() {
     this.previewMode.set(!this.previewMode());
     console.log(this.previewMode());
-    
   }
 
   onImagesUpload(event: Event) {
     const fileInput = event.target as HTMLInputElement;
     if (fileInput.files) {
       const filesArray = Array.from(fileInput.files);
-  
+
       if (this.uploadedImages.length + filesArray.length > this.maxImages) {
         alert(`You can upload a maximum of ${this.maxImages} images.`);
         return;
       }
-  
+
       const newImages = filesArray.map((file, index) => ({
         id: Date.now() + index, // just a simple unique id generator
         image: URL.createObjectURL(file),
       }));
-  
+
       this.uploadedImages = [...this.uploadedImages, ...filesArray];
       this.blog.update((current) => ({
         ...current,
@@ -110,7 +113,6 @@ export class BlogAddComponent {
     console.log(this.uploadedImages);
     
   }
-  
 
   removeImage(index: number) {
     this.uploadedImages.splice(index, 1);
@@ -127,7 +129,7 @@ export class BlogAddComponent {
   onTitleChange(title: string | null | undefined) {
     this.blog.update((b) => ({ ...b, title: title || '' }));
   }
-  
+
   onContentChange(content: string | null | undefined) {
     this.blog.update((b) => ({ ...b, content: content || '' }));
   }
