@@ -7,11 +7,11 @@ import { Router } from '@angular/router';
   selector: 'app-product-details',
   imports: [CommonModule],
   templateUrl: './product-details.component.html',
-  styleUrl: './product-details.component.css'
+  styleUrl: './product-details.component.css',
 })
 export class ProductDetailsComponent {
-   product!: Product;
-   constructor(private route: Router) {
+  product!: Product;
+  constructor(private route: Router) {
     const navigationState = history.state;
     if (navigationState && navigationState.product) {
       this.product = navigationState.product;
@@ -19,12 +19,12 @@ export class ProductDetailsComponent {
     console.log(this.product);
   }
 
-
   get discountedPrice(): number {
     if (this.product.discount) {
-      return this.product.price - (this.product.price * this.product.discount) / 100;
+      return (
+        this.product.price - (this.product.price * this.product.discount) / 100
+      );
     }
     return this.product.price;
   }
-
 }
